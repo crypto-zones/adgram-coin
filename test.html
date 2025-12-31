@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Watch & Earn</title>
+  <script async src="https://cdn.adsgram.ai/js/adsgram.js"></script>
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #22c55e;
+      color: #000;
+      margin-top: 20px;
+    }
+
+    .points {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="points">
+    Points: <span id="points">0</span>
+  </div>
+
+  <button onclick="watchAd()">Watch Ad & Earn 50 Points</button>
+
+  <script>
+    let points = 0;
+
+    function watchAd() {
+      if (!window.Adsgram) {
+        alert("Ads not loaded");
+        return;
+      }
+
+      Adsgram.show({
+        blockId: "int-20327",   // ✅ your Adsgram block code
+        type: "inertial",
+        onReward: () => {
+          points += 50;
+          document.getElementById("points").textContent = points;
+          alert("✅ You earned 50 points!");
+        },
+        onError: (err) => {
+          console.log(err);
+          alert("❌ Ad not available, try again later");
+        }
+      });
+    }
+  </script>
+
+</body>
+  </html>
